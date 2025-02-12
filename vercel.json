@@ -1,8 +1,26 @@
 {
+    "version": 2,
+    "builds": [
+        {
+            "src": "server.js",
+            "use": "@vercel/node"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/assets/(.*)",
+            "dest": "/dist/client/assets/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/server.js"
+        }
+    ],
     "rewrites": [
-      {
-        "source": "/((?!assets/).*)",
-        "destination": "server.js"
-      }
-    ]
-  }
+        {
+            "source": "/((?!assets/).*)",
+            "destination": "/server.js"
+        }
+    ],
+    "installCommand": "rm -rf package-lock.json node_modules && npm ci"
+}
