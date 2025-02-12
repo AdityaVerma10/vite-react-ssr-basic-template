@@ -16,11 +16,5 @@
             "dest": "/server.js"
         }
     ], 
-    "rewrites": [
-        {
-            "source": "/((?!assets/).*)",
-            "destination": "/server.js"
-        }
-    ],
     "installCommand": "rm -rf package-lock.json node_modules && npm ci"
 }
