@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import express from 'express';
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = false && process.env.NODE_ENV === 'production';
 const port = process.env.PORT || 5174;
 const base = process.env.BASE || '/';
 
@@ -12,7 +12,7 @@ const templateHtml = isProduction
 const app = express();
 
 let vite;
-if (true || !isProduction) {
+if (!isProduction) {
   const { createServer } = await import('vite');
   vite = await createServer({
     server: { middlewareMode: true },
@@ -33,7 +33,7 @@ app.use('*', async (req, res) => {
 
     let template;
     let render;
-    if (true || !isProduction) {
+    if (!isProduction) {
       template = await fs.readFile('./index.html', 'utf-8');
       template = await vite.transformIndexHtml(url, template);
       render = (await vite.ssrLoadModule('/src/entry-server.tsx')).render;
