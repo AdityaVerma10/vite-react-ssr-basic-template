@@ -12,7 +12,7 @@ const templateHtml = isProduction
 const app = express();
 
 let vite;
-if (!isProduction) {
+if (true || !isProduction) {
   const { createServer } = await import('vite');
   vite = await createServer({
     server: { middlewareMode: true },
@@ -33,7 +33,7 @@ app.use('*', async (req, res) => {
 
     let template;
     let render;
-    if (!isProduction) {
+    if (true || !isProduction) {
       template = await fs.readFile('./index.html', 'utf-8');
       template = await vite.transformIndexHtml(url, template);
       render = (await vite.ssrLoadModule('/src/entry-server.tsx')).render;
